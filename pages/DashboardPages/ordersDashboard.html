@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../Styling/DashboardStyling/AdminDachboardStyling.css">
+    <title>Orders Management Dashboard</title>
+    <style>
+        .status-select {
+            min-width: 120px;
+            border-radius: 20px;
+        }
+
+        .table-dark th {
+            background-color: #1a1a1a;
+            border-color: #ff2600;
+        }
+
+        .badge-count {
+            background-color: #ff2600;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard">
+        <div class="leftSideBar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-box">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Admin</h3>
+                </div>
+                <button id="toggleBtn"><i id="toggleIcon" class="fas fa-xmark"></i></button>
+            </div>
+            <div class="sidebarList">
+                <ul>
+                    <li id="superAdminLink" class="d-none"><i class="fas fa-user-shield"></i><a
+                            href="addNewAdminBySuperAdmin.html">Manage Admin&Users</a>
+                    </li>
+                    <li><i class="fa-solid fa-house"></i><a href="../userPage/product.html">Home</a></li>
+                    <li><i class="fas fa-th-list"></i><a href="DashboardAdmin.html">Categories</a></li>
+                    <li><i class="fas fa-box"></i><a href="productDasboard.html">Products</a></li>
+                    <li><i class="fas fa-list-check"></i><a href="ordersDashboard.html">Orders</a></li>
+                    <li><i class="fas fa-cog"></i><a href="../AuthPages/myProfile.html">Settings</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="centerContent container w-100">
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <h2>Orders Management</h2>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="badge-count" id="totalOrdersCount">Total Orders: 0</span>
+                        <i class="fa-solid fa-user-shield fs-3"></i>
+                        <button class="btn btn-outline-danger" onclick="logout()" type="button">Logout</button>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="table-responsive mt-5">
+                <table class="table table-bordered align-middle text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Total Price</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersList">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="orderDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: #1a1a1a; color: white; border: 1px solid #ff2600;">
+                <div class="modal-header" style="border-bottom: 1px solid #333;">
+                    <h5 class="modal-title">Order Items Detail</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="orderItemsDetail">
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid #333;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../Script/GloabalServiceScript/StorgeKeys.js"></script>
+    <script src="../../Script/DashboardScript/orderDashbord.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

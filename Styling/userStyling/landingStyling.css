@@ -1,0 +1,254 @@
+.grand {
+    width: 100%;
+    margin-top: 120px;
+    overflow: hidden;
+}
+
+.grand .container {
+    width: 95%;
+}
+
+
+.grand .head {
+    margin: 20px 0;
+}
+
+.grand .head h1 {
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #0b1c39;
+}
+
+
+.grand .card {
+    text-align: center;
+    background: transparent;
+    border: none;
+}
+
+.grand .card .card-body1 {
+    margin-top: 35px;
+}
+
+.grand .card .card-title1 {
+    color: #444;
+    font-size: 22px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.grand .card .card-text {
+    color: #ff2020;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+.photo,
+.photo1,
+.photo2,
+.img1,
+.img2 {
+    overflow: hidden;
+    position: relative;
+    transition: all 0.7s ease;
+}
+
+
+.grand .card:hover .img,
+.photo1:hover,
+.photo2:hover,
+.img1:hover,
+.img2:hover {
+    transform: scale(1.03);
+}
+
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    background-color: rgba(1, 10, 28, 0.4);
+    opacity: 0;
+    z-index: 2;
+    transition: all 0.5s;
+}
+
+.photo1:hover .overlay,
+.photo2:hover .overlay,
+.img1:hover .overlay,
+.img2:hover .overlay {
+    opacity: 1;
+}
+
+
+.grand .photo1 {
+    width: 48%;
+}
+
+.grand .photo2 {
+    width: 24%;
+}
+
+.grand .photo3 {
+    width: 24%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.grand .photo3 .img1,
+.grand .photo3 .img2 {
+    height: 49%;
+}
+
+
+.grand img,
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+.grand2 {
+    width: 100%;
+    height: 700px;
+    margin-top: 100px;
+
+    background-image: url('../../New folder/ProductImgs/videocover.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    transition: all 1s ease;
+    overflow: hidden;
+}
+
+/ .grand2 .overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    background-color: rgba(1, 10, 28, 0.3);
+    opacity: 0;
+    z-index: 1;
+    transition: all 1s;
+}
+
+.grand2:hover .overlay {
+    opacity: 0.9;
+
+}
+
+
+.grand2 .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 11;
+    transition: all 1s;
+}
+
+.grand2 .icon i {
+    width: 85px;
+    height: 85px;
+    line-height: 85px;
+    text-align: center;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 24px;
+    border: 1px solid #fff;
+    transition: all 0.5s;
+    background: transparent;
+}
+
+
+.grand2:hover i {
+    transform: scale(1.1);
+    background-color: #fff;
+    color: #ff2020;
+}
+
+
+.parent2 {
+    width: 300px;
+
+    height: 120px;
+    background-color: #212025;
+
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.parent2 .text h2 {
+    font-size: 24px;
+    margin: 0;
+    display: inline-block;
+}
+
+.parent2 .text i {
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+
+.grand {
+    width: 100%;
+    margin-top: 100px;
+}
+
+.method {
+    background-color: #ea0000;
+    padding: 60px 40px;
+
+}
+
+
+.parent4 {
+    padding: 10px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+
+.parent4 i {
+    font-size: 40px;
+    color: #ffffff;
+    margin-bottom: 25px;
+    display: block;
+    transition: transform 0.4s;
+
+}
+
+
+.parent4:hover i {
+    transform: translateY(-5px);
+}
+
+
+.parent4 h6 {
+    color: #ffffff;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+
+.parent4 p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #d3d1d1;
+
+}

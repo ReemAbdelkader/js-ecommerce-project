@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../../Styling/DashboardStyling/AdminDachboardStyling.css">
+
+    <title>product Admin Dashboard</title>
+</head>
+
+<body>
+    <div class="dashboard">
+        <div class="leftSideBar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-box">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Admin</h3>
+                </div>
+                <button id="toggleBtn">
+                    <i id="toggleIcon" class="fas fa-xmark"></i> </button>
+            </div>
+
+            <div class="sidebarList">
+                <ul>
+                    <li id="superAdminLink" class="d-none"><i class="fas fa-user-shield"></i><a
+                            href="addNewAdminBySuperAdmin.html">Manage Admin&Users</a>
+                    </li>
+
+                    <li><i class="fa-solid fa-house"></i><a href="../userPage/product.html">Home</a></li>
+
+                    <li><i class="fas fa-th-list"></i><a href="DashboardAdmin.html">Categories</a></li>
+                    <li><i class="fas fa-box"></i><a href="productDasboard.html">Products</a></li>
+                    <li><i class="fas fa-list-check"></i><a href="ordersDashboard.html">Orders</a></li>
+                    <li><i class="fas fa-cog"></i><a href="../AuthPages/myProfile.html">Settings</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="centerContent container w-100">
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <h2>Admin product Page</h2>
+                    <form class="d-flex align-items-center" style="gap:15px;" role="search">
+                        <i class="fa-solid fa-user-shield fs-3"></i>
+                        <button class="btn btn-outline-danger" onclick="logout()" type="button">Logout</button>
+                    </form>
+                </div>
+            </nav>
+            <div class="categoriesCard mt-5">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#categoryModal">
+                    <i class="fas fa-plus"></i> Add New product
+                </button>
+            </div>
+            <div id="alert">
+
+            </div>
+
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col-1 text-center"> Id</th>
+                            <th scope="col-1 text-center">name</th>
+                            <th scope="col-1 text-center">category</th>
+                            <th scope="col-5 text-center">description</th>
+                            <th scope="col-1 text-center"> Image</th>
+
+                            <div class="col-1">
+                                <th scope="col-5 text-center">price</th>
+                                <th scope="col-5 text-center">Stock</th>
+
+                                <th scope="col-2 text-center">Actions</th>
+                            </div>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+        <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background-color: #1a1a1a; color: white; border: 1px solid #ff2600;">
+
+                    <div class="modal-header" style="border-bottom: 1px solid #333;">
+                        <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="addCategoryForm">
+                            <div class="mb-3">
+                                <label class="form-label">Product Name</label>
+                                <input type="text" id="productName" class="form-control"
+                                    placeholder="Enter name (e.g. Classic)">
+                                <span class="text-danger" id="productNameError"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Product Category</label>
+                                <select id="productCategory" class="form-select" required>
+                                </select>
+                                <span class="text-danger" id="productCategoryError"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Product Description</label>
+                                <input type="text" id="productDescription" class="form-control"
+                                    placeholder="Enter Description (e.g. Classic Watch..)" required>
+                                <span class="text-danger" id="productDescriptionError"></span>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label class="form-label">Product Price</label>
+                                <input type="number" id="productPrice" class="form-control"
+                                    placeholder="Enter Price (e.g. 100)" required>
+                                <span class="text-danger" id="productPriceError"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Product stock</label>
+                                <input type="number" id="productStock" class="form-control"
+                                    placeholder="Enter stock (100)" required>
+                                <span class="text-danger" id="productStockError"></span>
+
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Product Image</label>
+                                <input type="file" id="productImage" class="form-control"
+                                    placeholder="Enter image URL (e.g. https://example.com/image.jpg)" required>
+                                <span class="text-danger" id="productImageError"></span>
+
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                    <div class="modal-footer" style="border-top: 1px solid #333;">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" form="addProductForm" class="btn btn-danger" id="saveNewProduct">Save
+                            Product</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background-color: #1a1a1a; color: white; border: 1px solid #ff2600;">
+
+                    <div class="modal-header" style="border-bottom: 1px solid #333;">
+                        <h5 class="modal-title" id="editproductModal">Edit The Product</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="editProductForm">
+                            <div class="mb-3">
+                                <label class="form-label">Product Name</label>
+                                <input type="text" id="editproductName" class="form-control"
+                                    placeholder="Enter name (e.g. Classic)" required>
+                                <span class="text-danger" id="editProductNameError"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Product Category</label>
+                                <select id="editproductCategory" class="form-select" required>
+                                </select>
+                                <span class="text-danger" id="editProductCategoryError"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Product Description</label>
+                                <input type="text" id="editproductDescription" class="form-control"
+                                    placeholder="Enter Description (e.g. Classic Watch..)" required>
+                                <span class="text-danger" id="editProductDescriptionError"></span>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label class="form-label">Product Price</label>
+                                <input type="number" id="editproductPrice" class="form-control"
+                                    placeholder="Enter Price (e.g. 100)" required>
+                                <span class="text-danger" id="editProductPriceError"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Product stock</label>
+                                <input type="number" id="editproductStock" class="form-control"
+                                    placeholder="Enter stock (e.g. 100)" required>
+                                <span class="text-danger" id="editProductStockError"></span>
+
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Product Image</label>
+                                <input type="file" id="editproductImage" class="form-control"
+                                    placeholder="Enter image URL (e.g. https://example.com/image.jpg)" required>
+                                <span class="text-danger" id="editProductImageError"></span>
+
+                            </div>
+
+
+
+
+                        </form>
+                    </div>
+
+                    <div class="modal-footer" style="border-top: 1px solid #333;">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" form="addCategoryForm" class="btn btn-danger"
+                            id="updateCategoryBtn">Update product</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="../../Script/GloabalServiceScript/StorgeKeys.js"></script>
+        <script src="../../Script/DashboardScript/productDashbordScript.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+
+</body>
+
+</html>

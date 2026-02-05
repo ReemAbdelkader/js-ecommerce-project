@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Smarty</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .profile-card {
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header-bg {
+            background: #dc3545;
+            height: 120px;
+            width: 100%;
+        }
+
+        .photo-wrapper {
+            text-align: center;
+            margin-top: -70px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .profile-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .cam-btn {
+            position: absolute;
+            bottom: 5px;
+            left: 55%;
+            background: #333;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+
+
+        .user-details {
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        .user-name {
+            color: #1a1a1a;
+            margin: 10px 0 5px 0;
+            display: block;
+            font-size: 1.6rem;
+            font-weight: 800;
+
+        }
+
+        .user-role {
+            background: #fff0f0;
+            color: #dc3545;
+            padding: 4px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .info-grid {
+            text-align: left;
+            margin-top: 25px;
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .info-row {
+            margin-bottom: 15px;
+        }
+
+        .info-row label {
+            color: #999;
+            font-size: 0.75rem;
+            display: block;
+        }
+
+        .info-row span {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .btn-update {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+            margin-top: 15px;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-update:hover {
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-card">
+        <div class="card-header-bg"></div>
+
+        <div class="photo-wrapper">
+            <img id="userImg" src="" alt="Profile Photo" class="profile-circle">
+            <div class="cam-btn" onclick="document.getElementById('uploadInput').click()">
+                <i class="fas fa-camera"></i>
+            </div>
+            <input type="file" id="uploadInput" class="d-none" accept="image/*">
+        </div>
+
+        <div class="user-details">
+            <h2 id="userName" class="user-name">Loading...</h2>
+            <span id="userRole" class="user-role">Role</span>
+
+            <div class="info-grid">
+                <div class="info-row">
+                    <label>EMAIL ADDRESS</label>
+                    <span id="userEmail">example@smarty.com</span>
+                </div>
+                <div class="info-row text-center">
+                    <label style="text-align: left;">PERMISSIONS</label>
+                    <div id="userPerms" class="mt-2"></div>
+                </div>
+            </div>
+
+            <a href="../AuthPages/changePassword.html" class="btn-update">
+                <i class="fas fa-key me-2"></i> Change Password
+            </a> <a href="../AuthPages/Login.html" class="btn-update" onclick="logout()">
+                <i class="fas fa-sign-out-alt me-2"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <script src="../../Script/GloabalServiceScript/StorgeKeys.js"></script>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const user = JSON.parse(localStorage.getItem("currentUser"));
+            if (!user) return (window.location.href = "../AuthPages/Login.html");
+            const firstName = user.firstName || "";
+            const lastName = user.lastName || "";
+            const fullName = `${firstName} ${lastName}`.trim() || "User Name";
+
+            document.getElementById("userName").innerText = fullName;
+            document.getElementById("userEmail").innerText = user.email;
+            document.getElementById("userRole").innerText = user.role;
+
+
+            const defaultImg = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+            document.getElementById("userImg").src = user.image || defaultImg;
+
+
+            const permsDiv = document.getElementById("userPerms");
+            const permissions = {
+                superadmin: ['Full Access', 'System Logs', 'User Management', 'Edit Products', 'Order Tracking', 'Browse Products', 'Edit Profile', 'Change Password', 'View Orders'],
+                admin: ['Edit Products', 'Order Tracking', 'Browse Products', 'Edit Profile', 'Change Password', 'View Orders'],
+                user: ['Browse Products', 'View Cart', 'View Wishlist', 'Place Orders', 'Edit Profile', 'Change Password', 'View Orders']
+            };
+            const myPerms = permissions[user.role] || permissions.user;
+            permsDiv.innerHTML = myPerms.map(p => `<span class="badge bg-light text-dark border m-1">${p}</span>`).join("");
+
+
+            document.getElementById("uploadInput").onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const base64Str = event.target.result;
+                        document.getElementById("userImg").src = base64Str;
+                        saveImage(base64Str, user);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+        });
+
+        function saveImage(base64Data, user) {
+            user.image = base64Data;
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            const allUsers = JSON.parse(localStorage.getItem("users")) || [];
+            const idx = allUsers.findIndex(u => u.email === user.email);
+            if (idx !== -1) {
+                allUsers[idx].image = base64Data;
+                localStorage.setItem("users", JSON.stringify(allUsers));
+            }
+        }
+    </script>
+</body>
+
+</html>

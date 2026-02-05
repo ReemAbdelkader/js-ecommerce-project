@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../../Styling/DashboardStyling/AdminDachboardStyling.css">
+
+    <title>Categories Admin Dashboard</title>
+</head>
+
+<body>
+    <div class="dashboard">
+        <div class="leftSideBar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-box">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Admin</h3>
+                </div>
+                <button id="toggleBtn">
+                    <i id="toggleIcon" class="fas fa-xmark"></i> </button>
+            </div>
+
+            <div class="sidebarList">
+                <ul>
+                    <li id="superAdminLink" class="d-none"><i class="fas fa-user-shield"></i><a
+                            href="addNewAdminBySuperAdmin.html">Manage Admin&Users</a>
+                    </li>
+                    <li><i class="fa-solid fa-house"></i><a href="../userPage/product.html">Home</a></li>
+
+                    <li><i class="fas fa-th-list"></i><a href="DashboardAdmin.html">Categories</a></li>
+                    <li><i class="fas fa-box"></i><a href="productDasboard.html">Products</a></li>
+                    <li><i class="fas fa-list-check"></i><a href="ordersDashboard.html">Orders</a></li>
+                    <li><i class="fas fa-cog"></i><a href="../AuthPages/myProfile.html">Settings</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="centerContent container w-100">
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <h2>Admin Categories Page</h2>
+                    <form class="d-flex align-items-center" style="gap:15px;" role="search">
+                        <i class="fa-solid fa-user-shield fs-3"></i>
+                        <button class="btn btn-outline-danger" onclick="logout()" type="button">Logout</button>
+                    </form>
+                </div>
+            </nav>
+            <div class="categoriesCard mt-5">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#categoryModal">
+                    <i class="fas fa-plus"></i> Add New Category
+                </button>
+            </div>
+
+            <div id="alert">
+
+            </div>
+
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Category Name</th>
+                            <th scope="col">Description</th>
+
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+        <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background-color: #1a1a1a; color: white; border: 1px solid #ff2600;">
+
+                    <div class="modal-header" style="border-bottom: 1px solid #333;">
+                        <h5 class="modal-title" id="exampleModalLabel">Add New Watch Category</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="addCategoryForm">
+                            <div class="mb-3">
+                                <label class="form-label">Category Name</label>
+                                <input type="text" id="catName" class="form-control"
+                                    placeholder="Enter name (e.g. Classic)" required>
+                                <span class="text-danger" id="categoryNameError"></span>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Category Description</label>
+                                <input type="text" id="catDescription" class="form-control"
+                                    placeholder="Enter Description (e.g. Classic Watch..)" required>
+                                <span class="text-danger" id="categoryDescriptionError"></span>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Slug (Automatic)</label>
+                                <input type="text" id="catSlug" class="form-control" readonly
+                                    style="background-color: #333; color: #ccc;">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Products Number</label>
+                                <input id="productsNumber" type="number" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer" style="border-top: 1px solid #333;">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" form="addCategoryForm" class="btn btn-danger" id="saveNewCategory">Save
+                            Category</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background-color: #1a1a1a; color: white; border: 1px solid #ff2600;">
+
+                    <div class="modal-header" style="border-bottom: 1px solid #333;">
+                        <h5 class="modal-title" id="editCategoryModal">Edit The Category</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="addCategoryForm">
+                            <div class="mb-3">
+                                <label class="form-label">Category Name</label>
+                                <input type="text" id="editCatName" class="form-control"
+                                    placeholder="Enter name (e.g. Classic)" required>
+                                <span class="text-danger" id="editCategoryNameError"></span>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Category Description</label>
+                                <input type="text" id="editCatDescription" class="form-control"
+                                    placeholder="Enter Description (e.g. Classic Watch..)" required>
+                                <span class="text-danger" id="editCategoryDescriptionError"></span>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Slug (Automatic)</label>
+                                <input type="text" id="catSlug" class="form-control" readonly
+                                    style="background-color: #333; color: #ccc;">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Products Number</label>
+                                <input id="editProductsNumber" type="number" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer" style="border-top: 1px solid #333;">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" form="addCategoryForm" class="btn btn-danger"
+                            id="updateCategoryBtn">Update Category</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="../../Script/GloabalServiceScript/StorgeKeys.js"></script>
+        <script src="../../Script/DashboardScript/AdminCategorayScript.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+
+</body>
+
+</html>

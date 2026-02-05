@@ -1,0 +1,105 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    scroll-behavior: smooth;
+    display: flex;
+}
+
+h2 {
+    font-family: 'Playfair Display';
+}
+
+.previous {
+    float: left;
+    margin-left: 50px;
+    display: inline;
+}
+
+.next {
+    float: right;
+    margin-right: 50px;
+    display: inline
+}
+
+.backgroundImg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.coverImg {
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    float: start;
+}
+
+/* Mobile Screen */
+@media (max-width:576) {
+    .prod_Name {
+        font-size: 11px;
+    }
+
+    .prod_Img {
+        width: 75px;
+        height: 75px;
+    }
+
+    .prod_Price {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .actions {
+        padding: 6px;
+    }
+}
+
+/* Small Screen */
+@media(max-width:768) {
+    .myProduct {
+        display: block;
+        border: 1px solid #ddd;
+        margin-bottom: 15px;
+        padding: 10px;
+    }
+
+    .prod_Name {
+        size: 14px;
+    }
+
+    .prod_Img {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+/* Mediam Screen */
+@media(max-width:992) {
+    .prod_Id {
+        display: none;
+    }
+
+    .myProduct {
+        display: block;
+        border: 1px solid #ddd;
+        margin-bottom: 15px;
+        padding: 10px;
+    }
+
+    .prod_Img {
+        width: 110px;
+        height: 110px;
+    }
+}
+
+/* Laarge Screen */
+@media(max-width:1200) {
+    .prod_Img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .prodTable {
+        width: 100%;
+    }
+}
